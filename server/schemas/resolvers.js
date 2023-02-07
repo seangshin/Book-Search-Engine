@@ -1,28 +1,29 @@
-const { Tech, Matchup } = require('../models');
+const User = require('<path-to-user-model>');
+const { ObjectId } = require('mongodb');
 
 const resolvers = {
   Query: {
-    tech: async () => {
-      return Tech.find({});
-    },
-    matchups: async (parent, { _id }) => {
-      const params = _id ? { _id } : {};
-      return Matchup.find(params);
-    },
+    users: () => User.find({}),
+    user: (_, { username }) => User.findOne({ username }),
+    savedBooks: (_, { username }) => User.findOne({ username }).savedBooks,
   },
   Mutation: {
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
+    addUser: (_, { username, email, password }) => {
+      const newUser = new User({ username, email, password });
+      return newUser.save();
     },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
+    addBook: (_, { username, book }) =>
+      User.findOneAndUpdate(
+        { username },
+        { $push: { savedBooks: book } },
         { new: true }
-      );
-      return vote;
-    },
+      ),
+    removeBook: (_, { username, bookId }) =>
+      User.findOneAndUpdate(
+        { username },
+        { $pull: { savedBooks: { _id: ObjectId(bookId) } } },
+        { new: true }
+      ),
   },
 };
 
