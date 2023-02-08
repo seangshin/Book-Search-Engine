@@ -80,7 +80,7 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // Mutation to unsave a book for a specific user
-    unsaveBook: async (parent, { userId, bookId }, context) => {
+    removeBook: async (parent, { userId, bookId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: userId },
