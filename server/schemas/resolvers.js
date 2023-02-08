@@ -4,27 +4,27 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    // Query to get all users
-    users: async () => {
-      // Find all users and populate their saved books
-      return User.find().populate('savedBooks');
-    },
-    // Query to get a specific user by their username
-    user: async (parent, { username }) => {
-      // Find the user with the specified username and populate their saved books
-      return User.findOne({ username }).populate('savedBooks');
-    },
-    // Query to get all saved books for a specific user
-    savedBooks: async (parent, { username }) => {
-      // Find the user with the specified username and return their saved books
-      const user = await User.findOne({ username });
-      return user.savedBooks;
-    },
-    // Query to get a specific saved book by its id
-    savedBook: async (parent, { bookId }) => {
-      // Find the saved book with the specified id
-      return Book.findOne({ _id: bookId });
-    },
+    // // Query to get all users
+    // users: async () => {
+    //   // Find all users and populate their saved books
+    //   return User.find().populate('savedBooks');
+    // },
+    // // Query to get a specific user by their username
+    // user: async (parent, { username }) => {
+    //   // Find the user with the specified username and populate their saved books
+    //   return User.findOne({ username }).populate('savedBooks');
+    // },
+    // // Query to get all saved books for a specific user
+    // savedBooks: async (parent, { username }) => {
+    //   // Find the user with the specified username and return their saved books
+    //   const user = await User.findOne({ username });
+    //   return user.savedBooks;
+    // },
+    // // Query to get a specific saved book by its id
+    // savedBook: async (parent, { bookId }) => {
+    //   // Find the saved book with the specified id
+    //   return Book.findOne({ _id: bookId });
+    // },
     // Query to get the currently authenticated user
     me: async (parent, args, context) => {
       if (context.user) {
