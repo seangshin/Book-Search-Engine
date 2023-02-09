@@ -1,30 +1,9 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Book } = require('../models');
+const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    // // Query to get all users
-    // users: async () => {
-    //   // Find all users and populate their saved books
-    //   return User.find().populate('savedBooks');
-    // },
-    // // Query to get a specific user by their username
-    // user: async (parent, { username }) => {
-    //   // Find the user with the specified username and populate their saved books
-    //   return User.findOne({ username }).populate('savedBooks');
-    // },
-    // // Query to get all saved books for a specific user
-    // savedBooks: async (parent, { username }) => {
-    //   // Find the user with the specified username and return their saved books
-    //   const user = await User.findOne({ username });
-    //   return user.savedBooks;
-    // },
-    // // Query to get a specific saved book by its id
-    // savedBook: async (parent, { bookId }) => {
-    //   // Find the saved book with the specified id
-    //   return Book.findOne({ _id: bookId });
-    // },
     // Query to get the currently authenticated user
     me: async (parent, args, context) => {
       if (context.user) {
@@ -46,7 +25,7 @@ const resolvers = {
       return { token, user };
     },
     // Mutation to log in an existing user
-    login: async (parent, { email, password }) => {
+    loginUser: async (parent, { email, password }) => {
       // Find the user with the specified email
       const user = await User.findOne({ email });
 
@@ -69,10 +48,13 @@ const resolvers = {
       return { token, user };
     },
     // Mutation to save a book for a specific user
-    saveBook: async (parent, { userId, book }, context) => {
+    saveBook: async (parent, { book }, context) => {
+      console.log('in saveBook resolver');
       if (context.user) {
+        console.log(context.user);
+        console.log(book);
         return User.findOneAndUpdate(
-          { _id: userId },
+          { _id: context.user._id },
           { $addToSet: { savedBooks: book } },
           { new: true }
         );
@@ -83,7 +65,7 @@ const resolvers = {
     removeBook: async (parent, { userId, bookId }, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
-          { _id: userId },
+          { _id: context.user._id },
           { $pull: { savedBooks: { _id: bookId } } },
           { new: true }
         );
