@@ -25,7 +25,7 @@ const resolvers = {
       return { token, user };
     },
     // Mutation to log in an existing user
-    loginUser: async (parent, { email, password }) => {
+    login: async (parent, { email, password }) => {
       // Find the user with the specified email
       const user = await User.findOne({ email });
 
@@ -48,16 +48,16 @@ const resolvers = {
       return { token, user };
     },
     // Mutation to save a book for a specific user
-    saveBook: async (parent, { book }, context) => {
+    saveBook: async (parent, args, context) => {
       console.log('in saveBook resolver');
       if (context.user) {
-        console.log(context.user);
-        console.log(book);
-        return User.findOneAndUpdate(
+        //const { bookId, authors, description, title, image, link } = args;
+        const user = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: book } },
+          { $addToSet: { savedBooks: args } },
           { new: true }
         );
+        return user;
       }
       throw new AuthenticationError('You need to be logged in!');
     },
