@@ -49,7 +49,6 @@ const resolvers = {
     },
     // Mutation to save a book for a specific user
     saveBook: async (parent, args, context) => {
-      console.log('in saveBook resolver');
       if (context.user) {
         //const { bookId, authors, description, title, image, link } = args;
         const user = await User.findOneAndUpdate(
