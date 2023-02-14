@@ -62,10 +62,6 @@ const SearchBooks = () => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
-    // const { authors, description, title, image } = bookToSave;
-    console.log(bookToSave);
-    // console.log(`bookId: ${bookId} ... authors: ${authors} ... authors: ${description} ... authors: ${title} ... authors: ${image} ... `)
-    
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -74,12 +70,10 @@ const SearchBooks = () => {
     }
 
     try {
-      console.log('in try statement');
       // // Execute the SAVE_BOOK mutation using the bookToSave data
       const { data } = await saveBook({ 
         variables:  { ...bookToSave },
       });
-      console.log(data);
       // if book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
