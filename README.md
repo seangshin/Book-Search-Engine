@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
  ![](/screenshot.JPG)
 
-Link to deployed application: 
+Link to deployed application: https://fast-savannah-16582.herokuapp.com/
 
 ## Description
 The motivation of this project is to build a MERN application using a GraphQL API built with Apollo Server. The application is built using a React front end, MongoDB database, and Node.js/Express.js server. It features a fully functioning Google Books API search engine built with a GraphQL API and an Apollo Server to fetch and modify data using queries and mutations. It also implements JSON Web Tokens (JWT) and authentication middleware to work in the context of a GraphQL API. All these technologies integrate together to give the ability to create a personalized user experience. 
