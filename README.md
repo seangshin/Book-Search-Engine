@@ -1,5 +1,44 @@
 # Book-Search-Engine
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+ ![](/screenshot.JPG)
+
+Link to deployed application: 
+
+## Description
+The motivation of this project is to build a MERN application using a GraphQL API built with Apollo Server. The application is built using a React front end, MongoDB database, and Node.js/Express.js server. It features a fully functioning Google Books API search engine built with a GraphQL API and an Apollo Server to fetch and modify data using queries and mutations. It also implements JSON Web Tokens (JWT) and authentication middleware to work in the context of a GraphQL API. All these technologies integrate together to give the ability to create a personalized user experience. 
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [Questions](#questions)
+- [Appendix](#appendix)
+  
+## Installation
+The following tools were used for development and testing of this project: Code development IDE (Microsoft VS Code), node.js (JavaScript runtime environment), npm (software registry containing inquirer). See below for the full list of dependencies.
+
+To test this application in development, run the following command in the root directory:
+$ npm run install
+$ npm run develop
+  
+## Usage
+Open the URL using a browser (Google Chrome preferred). 
+  
+## Credits
+Georgia Tech Coding Bootcamp instructors, TA's, and other faculty.
+
+## License
+MIT
+  
+## Questions
+GitHub URL: https://github.com/seangshin
+Reach out additional questions at shin.seang@gmail.com
+
+
+## Appendix
+
 Client to Server endpoints flow
 
 1. Client Side: The client-side code for saving a book would typically involve writing a GraphQL mutation in the form of a query string that defines the data to be sent to the server. This mutation would be triggered when the user clicks a save button or performs some other action in the client-side form.
@@ -18,6 +57,11 @@ Client to Server endpoints flow
 
 This is the general flow of a MERN app that uses a GraphQL API to save a book. Of course, the specifics may vary depending on the specific requirements of your project, but this should give you a high-level understanding of how the different components fit together.
 
+
+JSON Web Tokens (JWT)
+JWT is a standard for creating access tokens that are used to authenticate and authorize users in applications. A JWT is a string that contains a JSON object, which is cryptographically signed using a secret key, to verify its authenticity.
+
+The token consists of three parts: a header, a payload, and a signature. The header typically contains information about the algorithm used to sign the token. The payload contains information about the user, such as the user ID and any additional data required for authentication and authorization. The signature is a hash that is created by combining the header and payload with a secret key.
 
 
 
