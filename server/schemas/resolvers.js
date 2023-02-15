@@ -61,11 +61,11 @@ const resolvers = {
       throw new AuthenticationError('You need to be logged in!');
     },
     // Mutation to unsave a book for a specific user
-    removeBook: async (parent, { userId, bookId }, context) => {
+    removeBook: async (parent, args, context) => {
       if (context.user) {
         return User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: { _id: bookId } } },
+          { $pull: { savedBooks: { bookId: args.bookId } } },
           { new: true }
         );
       }
